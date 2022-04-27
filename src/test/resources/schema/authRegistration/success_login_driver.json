@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "user_id": {
+              "type": "integer"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "dob": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "phone_number": {
+                  "type": "string"
+                },
+                "avatar": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "email",
+                "name",
+                "dob",
+                "gender",
+                "address",
+                "phone_number",
+                "avatar",
+                "role",
+                "created_at",
+                "updated_at"
+              ]
+            },
+            "truck_type_id": {
+              "type": "integer"
+            },
+            "truck_type": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "truck_type": {
+                  "type": "string"
+                },
+                "max_volume": {
+                  "type": "integer"
+                },
+                "max_weight": {
+                  "type": "integer"
+                },
+                "price_per_distance": {
+                  "type": "integer"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "truck_type",
+                "max_volume",
+                "max_weight",
+                "price_per_distance",
+                "created_at",
+                "updated_at"
+              ]
+            },
+            "ktp_file": {
+              "type": "string"
+            },
+            "stnk_file": {
+              "type": "string"
+            },
+            "driver_license_file": {
+              "type": "string"
+            },
+            "age": {
+              "type": "integer"
+            },
+            "vehicle_identifier": {
+              "type": "string"
+            },
+            "nik": {
+              "type": "string"
+            },
+            "vehicle_picture": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "account_status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "user_id",
+            "user",
+            "truck_type_id",
+            "truck_type",
+            "ktp_file",
+            "stnk_file",
+            "driver_license_file",
+            "age",
+            "vehicle_identifier",
+            "nik",
+            "vehicle_picture",
+            "status",
+            "account_status",
+            "created_at",
+            "updated_at"
+          ]
+        }
+      },
+      "required": [
+        "token",
+        "user"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data"
+  ]
+}
