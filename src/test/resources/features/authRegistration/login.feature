@@ -35,14 +35,14 @@ Feature: Login
     And return body is matched with "<schema>" from "authRegistration" schema
 
   Examples:
-    | actor           | schema                      |
-    | customer        | success_login_customer.json |
-    | driver_verified | success_login_driver.json   |
-    | admin           | success_login_admin.json    |
+    | actor    | schema                      |
+    | customer | success_login_customer.json |
+    | driver   | success_login_driver.json   |
+    | admin    | success_login_admin.json    |
 
   @negative @get-auth
   Scenario: user unsuccess get user auth data
       Given user hasn't already had login token
       When user send GET request to see the current user data
-      Then status response code should be 403
-      And return body is matched with "failed-login.json" from "authRegistration" schema
+      Then status response code should be 400
+      And return body is matched with "failed_loginMe.json" from "authRegistration" schema

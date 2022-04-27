@@ -1,15 +1,13 @@
 package services;
 
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 
 
-import java.io.File;
-
-import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static net.serenitybdd.rest.SerenityRest.*;
 
 public class bringeeeAPI {
@@ -29,13 +27,13 @@ public class bringeeeAPI {
                 email = "ahmad@mail.com";
                 password = "ahmad123";
                 break;
-            case "driver_pending":
-                email = "wawan@mail.com";
-                password = "wawan123";
-                break;
             case "admin":
                 email = "admin@mail.com";
                 password = "admin123";
+                break;
+            case "driver_pending":
+                email = "wawan@mail.com";
+                password = "wawan123";
                 break;
             case "no_email":
                 password = "budi123";
@@ -67,46 +65,53 @@ public class bringeeeAPI {
                 .formParam("email",email)
                 .formParam("password", password)
                 .post(BASE_URL+"/api/auth");
-
     }
 
-    public void postLoginWithBody(String payloadName, String payloadFolder) {
-        String payloadPath = "src/test/resources/payload/"+payloadFolder+"/"+payloadName;
+    public String getBearerToken(String role) throws Exception {
+        String email = null;
+        String password = null;
 
-//        File jsonBody = new File(payloadPath);
-//        System.out.println(jsonBody);
+        switch (role) {
+            case "customer":
+                email = "budi@mail.com";
+                password = "budi123";
+                break;
+            case "driver":
+                email = "ahmad@mail.com";
+                password = "ahmad123";
+                break;
+            case "admin":
+                email = "admin@mail.com";
+                password = "admin123";
+                break;
+            default:
+                throw new Exception("no such role: " + role);
+        }
 
-//        RestAssured.given()
-//                .header("Content-Type", "application/x-www-form-urlencoded")
-//                .body(jsonBody.toString())
-//                .post(BASE_URL+"/api/auth");
-
-        SerenityRest.given().config(RestAssured.config()
+        Response responsePostMethod = given().config(RestAssured.config()
                         .encoderConfig(EncoderConfig.encoderConfig()
                                 .encodeContentTypeAs("", ContentType.URLENC)
                         )
                 )
                 .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-                .formParam("email","budi@mail.com")
-                .formParam("password", "budi123")
-                .post(BASE_URL+"/api/auth");
+                .formParam("email", email)
+                .formParam("password", password)
+                .post(BASE_URL + "/api/auth");
+
+        String jsonString = responsePostMethod.getBody().asString();
+
+        return JsonPath.from(jsonString).get("data.token");
     }
 
-    public void validateResponseCode(int responseCode) {
+    public void authMe(String token) {
+        if(token.equalsIgnoreCase("null")) {
+            SerenityRest.given()
+                    .get(BASE_URL+"/api/auth/me");
+        } else {
+           SerenityRest.given()
+                    .header("Authorization", "Bearer "+token)
+                    .get(BASE_URL+"/api/auth/me");
+        }
 
-        restAssuredThat(response -> response.statusCode(responseCode));
     }
-
-    public void validateJsonSchema(String schema, String folderSchema) {
-
-    }
-
-    public void usingToken(String role) {
-        String tokenGenerated = null;
-
-        RestAssured.given()
-                .header("Authorization", "Bearer "+tokenGenerated)
-                .get(BASE_URL+"/api/auth/me");
-    }
-
 }
