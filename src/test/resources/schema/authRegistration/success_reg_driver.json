@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "error": {
+      "type": "null"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "truck_type_id": {
+          "type": "integer"
+        },
+        "truck_tupe": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "truck_type": {
+              "type": "string"
+            },
+            "max_volume": {
+              "type": "integer"
+            },
+            "max_weight": {
+              "type": "integer"
+            },
+            "price_per_distance": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "truck_type",
+            "max_volume",
+            "max_weight",
+            "price_per_distance",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "ktp_file": {
+          "type": "string"
+        },
+        "stnk_file": {
+          "type": "string"
+        },
+        "driver_license_file": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer"
+        },
+        "vehicle_identifier": {
+          "type": "string"
+        },
+        "nik": {
+          "type": "string"
+        },
+        "vehicle_picture": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "account_status": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password",
+        "name",
+        "dob",
+        "gender",
+        "address",
+        "phone_number",
+        "avatar",
+        "role",
+        "truck_type_id",
+        "truck_tupe",
+        "ktp_file",
+        "stnk_file",
+        "driver_license_file",
+        "age",
+        "vehicle_identifier",
+        "nik",
+        "vehicle_picture",
+        "status",
+        "account_status",
+        "created_at"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "error",
+    "code",
+    "links",
+    "data"
+  ]
+}
