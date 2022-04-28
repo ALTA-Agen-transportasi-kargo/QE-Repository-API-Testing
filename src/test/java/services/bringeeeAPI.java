@@ -13,6 +13,8 @@ import static net.serenitybdd.rest.SerenityRest.*;
 public class bringeeeAPI {
     private static final String BASE_URL = "https://aws.wildani.tech";
 
+//    Feeature: Login API
+
     public void authAs(String actor) throws Exception {
 
         String email = null;
@@ -114,4 +116,32 @@ public class bringeeeAPI {
         }
 
     }
+//    End of Feature: Login API
+
+//    Feature: Wilayah API
+    public String setProvinceId(int id) {
+        return BASE_URL + "/api/provinces/"+id+"/cities";
+    }
+
+    public void getAllProvinces() {
+        SerenityRest.get(BASE_URL+"/api/provinces");
+    }
+
+    public void getCitiesByProvinceId(int id) {
+        SerenityRest.get(BASE_URL+"/api/provinces/"+id+"/cities");
+    }
+
+    public void getCitiesByProvinceId(String id) {
+        SerenityRest.get(BASE_URL+"/api/provinces/"+id+"/cities");
+    }
+
+    public void getDistrictsByCityId(int id, String url) {
+        SerenityRest.get(url+"/"+id+"/districts");
+    }
+
+    public void getDistrictsByCityId(String id, String url) {
+        SerenityRest.get(url+"/"+id+"/districts");
+    }
+
+//    End of Feature: Wilayah API
 }

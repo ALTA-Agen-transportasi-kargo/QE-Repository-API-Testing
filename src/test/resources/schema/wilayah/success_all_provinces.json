@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "ProvID": {
+              "type": "integer"
+            },
+            "ProvName": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ProvID",
+            "ProvName"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data"
+  ]
+}
