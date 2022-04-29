@@ -13,7 +13,8 @@ Feature: Customer Order List API
   Scenario Outline: GET unsuccess customer order list by using integer as parameter
     Given user has already had login token as "customer"
     When customer send GET request to show order list with parameter: <parameter>
-    Then status response code should be 400
+    Then status response code should be 200
+    But data should be empty
 
     Examples:
       | parameter |
@@ -25,7 +26,8 @@ Feature: Customer Order List API
   Scenario Outline: GET unsuccess customer order list by using invalid parameter
     Given user has already had login token as "customer"
     When customer send GET request to show order list with parameter: "<parameter>"
-    Then status response code should be 400
+    Then status response code should be 200
+    But data should be empty
 
     Examples:
       | parameter        |
