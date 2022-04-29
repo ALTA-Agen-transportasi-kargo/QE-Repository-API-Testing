@@ -11,11 +11,64 @@ import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
+import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
 public class bringeeeAPI {
     private static final String BASE_URL = "https://aws.wildani.tech";
+
+    private String bearerToken;
+//    Getters and Setters
+    public String getToken() {
+        return bearerToken;
+    }
+
+    public void setToken(String role) throws Exception {
+        String email;
+        String password;
+
+        switch (role) {
+            case "customer":
+                email = "budi@mail.com";
+                password = "budi123";
+                break;
+            case "driver":
+                email = "ahmad@mail.com";
+                password = "ahmad123";
+                break;
+            case "admin":
+                email = "admin@mail.com";
+                password = "admin123";
+                break;
+            case "noLogin":
+                email = "";
+                password = "";
+                break;
+            default:
+                throw new Exception("no such role: " + role);
+        }
+
+        Response responsePostMethod = given().config(RestAssured.config()
+                            .encoderConfig(EncoderConfig.encoderConfig()
+                                    .encodeContentTypeAs("", ContentType.URLENC)
+                            )
+                    )
+                    .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                    .formParam("email", email)
+                    .formParam("password", password)
+                    .post(BASE_URL + "/api/auth");
+
+            String jsonString = responsePostMethod.getBody().asString();
+            int responseCode = responsePostMethod.statusCode();
+
+        if(responseCode != 200) {
+            this.bearerToken = "null";
+        } else {
+            this.bearerToken = JsonPath.from(jsonString).get("data.token");
+        }
+    }
+
 
 //    Feeature: Login API
 
@@ -73,42 +126,6 @@ public class bringeeeAPI {
                 .post(BASE_URL+"/api/auth");
     }
 
-    public String getBearerToken(String role) throws Exception {
-        String email;
-        String password;
-
-        switch (role) {
-            case "customer":
-                email = "budi@mail.com";
-                password = "budi123";
-                break;
-            case "driver":
-                email = "ahmad@mail.com";
-                password = "ahmad123";
-                break;
-            case "admin":
-                email = "admin@mail.com";
-                password = "admin123";
-                break;
-            default:
-                throw new Exception("no such role: " + role);
-        }
-
-        Response responsePostMethod = given().config(RestAssured.config()
-                        .encoderConfig(EncoderConfig.encoderConfig()
-                                .encodeContentTypeAs("", ContentType.URLENC)
-                        )
-                )
-                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-                .formParam("email", email)
-                .formParam("password", password)
-                .post(BASE_URL + "/api/auth");
-
-        String jsonString = responsePostMethod.getBody().asString();
-
-        return JsonPath.from(jsonString).get("data.token");
-    }
-
     public void authMe(String token) {
         if(token.equalsIgnoreCase("null")) {
             SerenityRest.given()
@@ -118,6 +135,7 @@ public class bringeeeAPI {
                     .header("Authorization", "Bearer "+token)
                     .get(BASE_URL+"/api/auth/me");
         }
+        System.out.println(token);
 
     }
 //    End of Feature: Login API
@@ -348,6 +366,106 @@ public class bringeeeAPI {
 
     }
 //    End of Feature: Registration API
+//    Customer Create Order API
+    public void createOrder(String condition, String token) throws Exception {
+        System.out.println(token);
+        //  Forms input:
+
+        String destination_start_province = "DKI JAKARTA";
+        String destination_start_city = "JAKARTA UTARA";
+        String destination_start_district = "PADEMANGAN";
+        String destination_start_address = "Pademangan Jakarta Utara";
+        String destination_start_postal = "14420";
+        String destination_start_lat = "-6.129634";
+        String destination_start_long = "106.827312";
+        String destination_end_province = "JAWA BARAT";
+        String destination_end_city = "KARAWANG";
+        String destination_end_district = "KARAWANG BARAT";
+        String destination_end_address = "Karawang Barat, Karawang";
+        String destination_end_postal = "41311";
+        String destination_end_lat = "-6.276677";
+        String destination_end_long = "107.286206";
+        File order_picture = new File("src/test/resources/upload/avatar.jpg");
+        String truck_type_id = "1";
+        String total_volume = "200";
+        String total_weight = "30";
+        String description = "order coba coba";
+
+        switch (condition) {
+            case "normal":
+            case "without_order_picture":
+                break;
+            case "without_end_destination":
+                destination_end_province = "";
+                destination_end_city = "";
+                destination_end_district = "";
+                destination_end_address = "";
+            break;
+            case "without_order_measurement":
+                total_volume = "";
+                total_weight = "";
+            break;
+            default:
+                throw new Exception("no such condition exist: "+condition);
+        }
+
+        System.out.println(token);
+//        Post Method
+       if(condition.equalsIgnoreCase("without_order_picture")) {
+
+           SerenityRest.given().contentType("multipart/form-data")
+                   .header("Authorization", "Bearer " + token )
+                   .multiPart("destination_start_province", destination_start_province)
+                   .multiPart("destination_start_city", destination_start_city)
+                   .multiPart("destination_start_district", destination_start_district)
+                   .multiPart("destination_start_address", destination_start_address)
+                   .multiPart("destination_start_postal", destination_start_postal)
+                   .multiPart("destination_start_lat", destination_start_lat)
+                   .multiPart("destination_start_long", destination_start_long)
+                   .multiPart("destination_end_province", destination_end_province)
+                   .multiPart("destination_end_city", destination_end_city)
+                   .multiPart("destination_end_district", destination_end_district)
+                   .multiPart("destination_end_address", destination_end_address)
+                   .multiPart("destination_end_postal", destination_end_postal)
+                   .multiPart("destination_end_lat", destination_end_lat)
+                   .multiPart("destination_end_long", destination_end_long)
+                   .multiPart("truck_type_id", truck_type_id)
+                   .multiPart("total_volume", total_volume)
+                   .multiPart("total_weight", total_weight)
+                   .multiPart("description", description)
+                   .post(BASE_URL+"/api/customers/orders");
+           System.out.println(token);
+       } else {
+
+           SerenityRest.given().contentType("multipart/form-data")
+                   .header("Authorization", "Bearer " + token)
+                   .multiPart("destination_start_province", destination_start_province)
+                   .multiPart("destination_start_city", destination_start_city)
+                   .multiPart("destination_start_district", destination_start_district)
+                   .multiPart("destination_start_address", destination_start_address)
+                   .multiPart("destination_start_postal", destination_start_postal)
+                   .multiPart("destination_start_lat", destination_start_lat)
+                   .multiPart("destination_start_long", destination_start_long)
+                   .multiPart("destination_end_province", destination_end_province)
+                   .multiPart("destination_end_city", destination_end_city)
+                   .multiPart("destination_end_district", destination_end_district)
+                   .multiPart("destination_end_address", destination_end_address)
+                   .multiPart("destination_end_postal", destination_end_postal)
+                   .multiPart("destination_end_lat", destination_end_lat)
+                   .multiPart("destination_end_long", destination_end_long)
+                   .multiPart("order_picture", order_picture)
+                   .multiPart("truck_type_id", truck_type_id)
+                   .multiPart("total_volume", total_volume)
+                   .multiPart("total_weight", total_weight)
+                   .multiPart("description", description)
+                   .post(BASE_URL+"/api/customers/orders");
+
+       }
+    }
+
+
+
+//    End of Feature: Customer Create Order API
 
 
 
