@@ -181,7 +181,7 @@ public class bringeeeAPI {
 //        pengkondisian berdasarkan kasus
         switch (Case) {
             case "normal":
-                email = "automate@test.qa";
+                email = "automatets@test.qa";
                 password = "testqa";
                 name = "for test purposes";
                 dob = "1990-01-01";
@@ -250,7 +250,7 @@ public class bringeeeAPI {
 //        kondisi
         switch (Case) {
             case "normal":
-                email = "automate@test.qa";
+                email = "automatest@test.qa";
                 password = "testqa";
                 name = "for test purposes";
                 dob = "1990-01-01";
