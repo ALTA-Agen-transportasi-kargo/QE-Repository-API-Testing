@@ -45,6 +45,10 @@ public class bringeeeAPI {
                 email = "";
                 password = "";
                 break;
+            case "akun_test":
+                email = "buattest@qe.alterra";
+                password = "test123";
+                break;
             default:
                 throw new Exception("no such role: " + role);
         }
@@ -463,9 +467,26 @@ public class bringeeeAPI {
        }
     }
 
-
-
 //    End of Feature: Customer Create Order API
+//    Customer Order List API
+
+    public void getOrderListBy(String parameter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", parameter)
+                .get(BASE_URL + "/api/customers/orders");
+    }
+
+    public void getOrderListBy(int parameter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", parameter)
+                .get(BASE_URL + "/api/customers/orders");
+    }
+//    End of Feature: Customer Order List API
+//    Customer detail order API
+
+//    end of customer detail order API
 
 
 
