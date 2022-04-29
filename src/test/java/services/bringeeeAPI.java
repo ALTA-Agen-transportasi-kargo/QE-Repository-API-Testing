@@ -486,6 +486,20 @@ public class bringeeeAPI {
 //    End of Feature: Customer Order List API
 //    Customer detail order API
 
+    public void getOrderDetail(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/orders/"+id);
+
+    }
+
+    public void getOrderDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/orders/"+id);
+
+    }
+
 //    end of customer detail order API
 
 
