@@ -466,6 +466,79 @@ public class bringeeeAPI {
 
 
 //    End of Feature: Customer Create Order API
+//    Feature: Edit Profile Customer
+
+    public void editProfile (String condition, String token) throws Exception {
+        System.out.println(token);
+//        form yg dibutuhin untuk edit profile:
+        String email = "";
+        String password = "";
+        String name = "";
+        String dob;
+        String gender = "";
+        String address;
+        String phone_number;
+
+//        pengkondisian berdasarkan kasus
+        switch (condition) {
+            case "normal":
+                email = "automation@test.qa";
+                password = "test123";
+                name = "for test purposes";
+                dob = "1990-01-01";
+                gender = "male";
+                address = "test address";
+                phone_number = "081234567890";
+                break;
+            case "without_email_password":
+                name = "contoh qa";
+                dob = "1990-01-01";
+                gender = "male";
+                address = "Contoh alamat";
+                phone_number = "081234567890";
+                break;
+            case "without_email":
+                password = "testaja";
+                dob = "1990-01-01";
+                gender = "male";
+                address = "Contoh alamat";
+                phone_number = "081234567890";
+                break;
+            case "without_password":
+                email = "delisa@test.qa";
+                name = "deli ya";
+                dob = "1998-12-01";
+                gender = "female";
+                address = "alamat";
+                phone_number = "081234522290";
+                break;
+            default:
+                throw new Exception("no such case: "+condition);
+        }
+
+//        PUT method
+        SerenityRest.given().contentType("multipart/form-data")
+                .multiPart("email",email)
+                .multiPart("password",password)
+                .multiPart("name",name)
+                .multiPart("dob",dob)
+                .multiPart("gender",gender)
+                .multiPart("address",address)
+                .multiPart("phone_number",phone_number)
+                .put(BASE_URL+"/api/customers");
+
+        System.out.println(lastResponse().asString());
+
+    }
+
+//    End of Feature: Edit Profile Customer
+//    Feature: Delete Customer
+
+    public void deleteCustomer(String token) throws Exception {
+        SerenityRest.delete(BASE_URL + "/api/customers");
+    }
+
+//    End of Feature: Delete Customer
 
 
 
