@@ -25,79 +25,64 @@
     "data": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "email": {
+        "token": {
           "type": "string"
         },
-        "password": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "dob": {
-          "type": "string"
-        },
-        "gender": {
-          "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "phone_number": {
-          "type": "string"
-        },
-        "avatar": {
-          "type": "string"
-        },
-        "role": {
-          "type": "string"
-        },
-        "created_at": {
-          "type": "string"
-        },
-        "updated_at": {
-          "type": "string"
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dob": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "avatar": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "email",
+            "name",
+            "dob",
+            "gender",
+            "address",
+            "phone_number",
+            "avatar",
+            "role",
+            "created_at",
+            "updated_at"
+          ]
         }
       },
       "required": [
-        "id",
-        "email",
-        "password",
-        "name",
-        "dob",
-        "gender",
-        "address",
-        "phone_number",
-        "avatar",
-        "role",
-        "created_at",
-        "updated_at"
-      ]
-    },
-    "pagination": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "type": "integer"
-        },
-        "limit": {
-          "type": "integer"
-        },
-        "total_pages": {
-          "type": "integer"
-        },
-        "total_records": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "page",
-        "limit",
-        "total_pages",
-        "total_records"
+        "token",
+        "user"
       ]
     }
   },
@@ -106,7 +91,6 @@
     "code",
     "error",
     "links",
-    "data",
-    "pagination"
+    "data"
   ]
 }
