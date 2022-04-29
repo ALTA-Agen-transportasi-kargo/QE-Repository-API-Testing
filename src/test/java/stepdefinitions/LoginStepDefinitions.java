@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginStepDefinitions {
     bringeeeAPI bringee = new bringeeeAPI();
 
-    String tokenGenerated;
+//    String tokenGenerated;
 
     @When("user send POST login request as {string}")
     public void userSendPOSTLoginRequestAs(String actor) throws Exception {
@@ -35,19 +35,18 @@ public class LoginStepDefinitions {
 
     @Given("user has already had login token as {string}")
     public void userHasAlreadyHadLoginToken(String role) throws Exception {
-        this.tokenGenerated = bringee.getBearerToken(role);
+        bringee.setToken(role);
     }
 
     @When("user send GET request to see the current user data")
     public void userSendGETRequestToSeeTheCurrentUserData() {
-        bringee.authMe(tokenGenerated);
+        bringee.authMe(bringee.getToken());
     }
 
     @Given("user hasn't already had login token")
-    public void userHasnTAlreadyHadLoginToken() {
-        this.tokenGenerated = "null";
+    public void userHasnTAlreadyHadLoginToken() throws Exception {
+        bringee.setToken("noLogin");
     }
-
 
     @And("user role should match with {string}")
     public void userRoleShouldMatchWith(String role) {

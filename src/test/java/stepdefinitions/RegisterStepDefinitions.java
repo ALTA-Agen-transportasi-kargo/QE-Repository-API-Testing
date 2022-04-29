@@ -16,10 +16,6 @@ public class RegisterStepDefinitions {
         }
     }
 
-    @And("return body is matched with {string}")
-    public void returnBodyIsMatchedWith(String schema) {
-    }
-
     @When("user send POST request to register as {string} with case: {string}")
     public void userSendPOSTRequestToRegisterAsWithCase(String role, String condition) throws Exception {
 
