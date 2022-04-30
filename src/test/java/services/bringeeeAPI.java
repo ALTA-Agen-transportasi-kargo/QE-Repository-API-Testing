@@ -20,59 +20,58 @@ public class bringeeeAPI {
 
     private String bearerToken;
 //    Getters and Setters
+public void setToken(String role) throws Exception {
+    String email;
+    String password;
+
+    switch (role) {
+        case "customer":
+            email = "budi@mail.com";
+            password = "budi123";
+            break;
+        case "driver":
+            email = "ahmad@mail.com";
+            password = "ahmad123";
+            break;
+        case "admin":
+            email = "admin@mail.com";
+            password = "admin123";
+            break;
+        case "noLogin":
+            email = "ga@ada.akun";
+            password = "gadaakun";
+            break;
+        case "akun_test":
+            email = "buattest@qe.alterra";
+            password = "test123";
+            break;
+        default:
+            throw new Exception("no such role: " + role);
+    }
+
+    Response responsePostMethod = given().config(RestAssured.config()
+                    .encoderConfig(EncoderConfig.encoderConfig()
+                            .encodeContentTypeAs("", ContentType.URLENC)
+                    )
+            )
+            .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+            .formParam("email", email)
+            .formParam("password", password)
+            .post(BASE_URL + "/api/auth");
+
+    String jsonString = responsePostMethod.getBody().asString();
+    int responseCode = responsePostMethod.statusCode();
+
+    if(responseCode != 200) {
+        this.bearerToken = "null";
+    } else {
+        this.bearerToken = JsonPath.from(jsonString).get("data.token");
+    }
+}
+
     public String getToken() {
         return bearerToken;
     }
-
-    public void setToken(String role) throws Exception {
-        String email;
-        String password;
-
-        switch (role) {
-            case "customer":
-                email = "budi@mail.com";
-                password = "budi123";
-                break;
-            case "driver":
-                email = "ahmad@mail.com";
-                password = "ahmad123";
-                break;
-            case "admin":
-                email = "admin@mail.com";
-                password = "admin123";
-                break;
-            case "noLogin":
-                email = "";
-                password = "";
-                break;
-            case "akun_test":
-                email = "buattest@qe.alterra";
-                password = "test123";
-                break;
-            default:
-                throw new Exception("no such role: " + role);
-        }
-
-        Response responsePostMethod = given().config(RestAssured.config()
-                            .encoderConfig(EncoderConfig.encoderConfig()
-                                    .encodeContentTypeAs("", ContentType.URLENC)
-                            )
-                    )
-                    .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-                    .formParam("email", email)
-                    .formParam("password", password)
-                    .post(BASE_URL + "/api/auth");
-
-            String jsonString = responsePostMethod.getBody().asString();
-            int responseCode = responsePostMethod.statusCode();
-
-        if(responseCode != 200) {
-            this.bearerToken = "null";
-        } else {
-            this.bearerToken = JsonPath.from(jsonString).get("data.token");
-        }
-    }
-
 
 //    Feeature: Login API
 
@@ -502,6 +501,23 @@ public class bringeeeAPI {
 
 //    end of customer detail order API
 
+//    Customer order histories API
 
+    public void getOrderHistories(int id, String token) {
+
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/customers/orders/"+id+"/histories");
+    }
+
+
+    public void getOrderHistories(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/customers/orders/"+id+"/histories");
+    }
+
+
+//    End of Customer order histories API
 
 }
