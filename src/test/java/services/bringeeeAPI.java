@@ -553,4 +553,23 @@ public void setToken(String role) throws Exception {
     }
 
 //    End of Driver detail API
+//    Customer list API (Admin)
+
+    public void getCustomerList(String filter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("name", filter)
+                .queryParam("limit", 20)
+                .queryParam("page", 1)
+                .get(BASE_URL + "/api/customers");
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+
+//    End of Customer List API
+
+
+
+
 }
