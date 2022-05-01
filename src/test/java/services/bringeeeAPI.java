@@ -27,23 +27,19 @@ public void setToken(String role) throws Exception {
     switch (role) {
         case "customer":
             email = "budi@mail.com";
-            password = "budi123";
+            password = "budi";
             break;
         case "driver":
-            email = "ahmad@mail.com";
-            password = "ahmad123";
+            email = "driver1@mail.com";
+            password = "driver1";
             break;
         case "admin":
             email = "admin@mail.com";
-            password = "admin123";
+            password = "admin";
             break;
         case "noLogin":
             email = "ga@ada.akun";
             password = "gadaakun";
-            break;
-        case "akun_test":
-            email = "buattest@qe.alterra";
-            password = "test123";
             break;
         default:
             throw new Exception("no such role: " + role);
@@ -562,13 +558,24 @@ public void setToken(String role) throws Exception {
                 .queryParam("limit", 20)
                 .queryParam("page", 1)
                 .get(BASE_URL + "/api/customers");
-
-        System.out.println(lastResponse().prettyPrint());
     }
 
 
 //    End of Customer List API
+//    Customer Detail API
+    public void getCustomerDetail(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/" + id);
+    }
 
+    public void getCustomerDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/" + id);
+    }
+
+//    End of customer Detail API
 
 
 
