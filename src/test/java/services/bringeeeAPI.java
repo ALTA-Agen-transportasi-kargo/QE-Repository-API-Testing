@@ -56,6 +56,30 @@ public class bringeeeAPI {
             default:
                 throw new Exception("no such role: " + role);
         }
+    switch (role) {
+        case "customer":
+            email = "budi@mail.com";
+            password = "budi123";
+            break;
+        case "driver":
+            email = "ahmad@mail.com";
+            password = "ahmad123";
+            break;
+        case "admin":
+            email = "admin@mail.com";
+            password = "admin123";
+            break;
+        case "noLogin":
+            email = "ga@ada.akun";
+            password = "gadaakun";
+            break;
+        case "akun_test":
+            email = "buattest@qe.alterra";
+            password = "test123";
+            break;
+        default:
+            throw new Exception("no such role: " + role);
+    }
 
         Response responsePostMethod = given().config(RestAssured.config()
                             .encoderConfig(EncoderConfig.encoderConfig()
@@ -561,6 +585,23 @@ public class bringeeeAPI {
 
 //    end of customer detail order API
 
+//    Customer order histories API
 
+    public void getOrderHistories(int id, String token) {
+
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/customers/orders/"+id+"/histories");
+    }
+
+
+    public void getOrderHistories(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/customers/orders/"+id+"/histories");
+    }
+
+
+//    End of Customer order histories API
 
 }
