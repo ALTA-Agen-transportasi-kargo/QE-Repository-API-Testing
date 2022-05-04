@@ -604,4 +604,18 @@ public class bringeeeAPI {
 
 //    End of Customer order histories API
 
+//  Driver List API (admin)
+
+    public void getDriverList(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("limit", 25)
+                .queryParam("page", 1)
+                .get(BASE_URL + "/api/drivers");
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+
+//    End of Driver List API
 }
