@@ -660,7 +660,21 @@ public class bringeeeAPI {
     }
 
 //    End of customer Detail API
+//      Admin Confirm Driver API
 
+    public void confirmDriverId(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/"+id+"/confirm");
+    }
+
+    public void confirmDriverId(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/"+id+"/confirm");
+    }
+
+//    End of Admin Confirm Driver API
 
 
 }
