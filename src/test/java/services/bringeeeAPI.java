@@ -28,34 +28,6 @@ public class bringeeeAPI {
         String email;
         String password;
 
-        switch (role) {
-            case "customer":
-                email = "budi@mail.com";
-                password = "budi";
-                break;
-            case "driver":
-                email = "driver1@mail.com";
-                password = "driver1";
-                break;
-            case "admin":
-                email = "admin@mail.com";
-                password = "admin";
-                break;
-            case "noLogin":
-                email = "";
-                password = "";
-                break;
-            case "customer2":
-                email = "bunga@mail.com";
-                password = "bunga";
-                break;
-            case "akun_test":
-                email = "buattest@qe.alterra";
-                password = "test123";
-                break;
-            default:
-                throw new Exception("no such role: " + role);
-        }
     switch (role) {
         case "customer":
             email = "budi@mail.com";
@@ -69,9 +41,17 @@ public class bringeeeAPI {
             email = "admin@mail.com";
             password = "admin";
             break;
+        case "customer2":
+            email = "bunga@mail.com";
+            password = "bunga";
+            break;
         case "noLogin":
             email = "ga@ada.akun";
             password = "gadaakun";
+            break;
+        case "akun_test":
+            email = "buattest@qe.alterra";
+            password = "test123";
             break;
         default:
             throw new Exception("no such role: " + role);
@@ -436,8 +416,6 @@ public class bringeeeAPI {
             default:
                 throw new Exception("no such condition exist: "+condition);
         }
-
-        System.out.println(token);
 //        Post Method
        if(condition.equalsIgnoreCase("without_order_picture")) {
 
@@ -462,7 +440,6 @@ public class bringeeeAPI {
                    .multiPart("total_weight", total_weight)
                    .multiPart("description", description)
                    .post(BASE_URL+"/api/customers/orders");
-           System.out.println(token);
        } else {
 
            SerenityRest.given().contentType("multipart/form-data")
