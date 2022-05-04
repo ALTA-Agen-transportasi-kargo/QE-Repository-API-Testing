@@ -11,26 +11,6 @@
     "error": {
       "type": "string"
     },
-    "errors": {
-      "type": "array",
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "error": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "field",
-            "error"
-          ]
-        }
-      ]
-    },
     "links": {
       "type": "object",
       "properties": {
@@ -47,7 +27,6 @@
     "status",
     "code",
     "error",
-    "errors",
     "links"
   ]
 }

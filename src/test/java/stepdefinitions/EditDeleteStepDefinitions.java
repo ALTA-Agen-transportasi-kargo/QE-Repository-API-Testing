@@ -8,7 +8,7 @@ public class EditDeleteStepDefinitions {
 
     @When("customer send DELETE request to delete account")
     public void customerSendDELETERequestToDeleteAccount() throws Exception {
-        bringeee.setToken("customer");
+        bringeee.setToken("customer2");
         bringeee.deleteCustomer(bringeee.getToken());
     }
 
@@ -19,13 +19,13 @@ public class EditDeleteStepDefinitions {
     }
 
     @When("customer send PUT request to edit profile")
-    public void customerSendPUTRequestToEditProfile () throws Exception {
+    public void customerSendPUTRequestToEditProfile() throws Exception {
         bringeee.setToken("customer");
         bringeee.editProfile("normal", bringeee.getToken());
     }
 
-    @When("customer send PUT request to edit profile with condition: {string}")
-    public void customerSendPUTRequestToEditProfileWithCondition(String condition) throws Exception {
+    @When("customer send PUT request to edit profile without condition: {string}")
+    public void customerSendPUTRequestToEditProfileWithoutNameField(String condition) throws Exception {
         bringeee.setToken("customer");
         bringeee.editProfile(condition, bringeee.getToken());
     }
