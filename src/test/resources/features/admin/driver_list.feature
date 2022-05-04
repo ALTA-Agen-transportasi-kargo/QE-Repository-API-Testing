@@ -1,5 +1,5 @@
 @admin_driver_list @admin_get_driver_customer
-Feature: Admin Driver List API
+Feature: Driver List API - Admin
 
   @positive
   Scenario: GET success show driver list

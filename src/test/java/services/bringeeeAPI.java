@@ -642,13 +642,24 @@ public class bringeeeAPI {
                 .queryParam("limit", 20)
                 .queryParam("page", 1)
                 .get(BASE_URL + "/api/customers");
-
-        System.out.println(lastResponse().prettyPrint());
     }
 
 
 //    End of Customer List API
+//    Customer Detail API
+    public void getCustomerDetail(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/" + id);
+    }
 
+    public void getCustomerDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL + "/api/customers/" + id);
+    }
+
+//    End of customer Detail API
 
 
 

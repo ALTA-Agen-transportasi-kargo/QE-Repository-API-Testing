@@ -18,6 +18,13 @@ Feature: Customer List API - Admin
     And return body is matched with "success_customer_list.json" from "admin" schema
 
   @negative
+  Scenario: Admin GET customer list successfully using filter name with invalid name
+    Given user has already had login token as "admin"
+    When admin send GET request to show customer list with filter name "candraxxx"
+    Then status response code should be 400
+    And return body is matched with "failed_customer_list.json" from "admin" schema
+
+  @negative
   Scenario Outline: Admin GET customer list unsuccessfully
     Given user has already had login token as "<role>"
     When "<role>" send GET request to show customer list
