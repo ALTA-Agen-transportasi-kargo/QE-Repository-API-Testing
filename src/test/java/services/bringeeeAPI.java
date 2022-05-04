@@ -618,4 +618,23 @@ public class bringeeeAPI {
 
 
 //    End of Driver List API
+// Driver Detail API (admin)
+
+    public void getDriverDetail(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+ token)
+                .get(BASE_URL+"/api/drivers/"+id);
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+    public void getDriverDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+ token)
+                .get(BASE_URL+"/api/drivers/"+id);
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+//    End of Driver detail API
 }
