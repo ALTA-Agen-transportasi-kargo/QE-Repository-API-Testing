@@ -20,10 +20,42 @@ public class bringeeeAPI {
 
     private String bearerToken;
 //    Getters and Setters
-public void setToken(String role) throws Exception {
-    String email;
-    String password;
+    public String getToken() {
+        return bearerToken;
+    }
 
+    public void setToken(String role) throws Exception {
+        String email;
+        String password;
+
+        switch (role) {
+            case "customer":
+                email = "budi@mail.com";
+                password = "budi";
+                break;
+            case "driver":
+                email = "driver1@mail.com";
+                password = "driver1";
+                break;
+            case "admin":
+                email = "admin@mail.com";
+                password = "admin";
+                break;
+            case "noLogin":
+                email = "";
+                password = "";
+                break;
+            case "customer2":
+                email = "bunga@mail.com";
+                password = "bunga";
+                break;
+            case "akun_test":
+                email = "buattest@qe.alterra";
+                password = "test123";
+                break;
+            default:
+                throw new Exception("no such role: " + role);
+        }
     switch (role) {
         case "customer":
             email = "budi@mail.com";
@@ -49,29 +81,26 @@ public void setToken(String role) throws Exception {
             throw new Exception("no such role: " + role);
     }
 
-    Response responsePostMethod = given().config(RestAssured.config()
-                    .encoderConfig(EncoderConfig.encoderConfig()
-                            .encodeContentTypeAs("", ContentType.URLENC)
+        Response responsePostMethod = given().config(RestAssured.config()
+                            .encoderConfig(EncoderConfig.encoderConfig()
+                                    .encodeContentTypeAs("", ContentType.URLENC)
+                            )
                     )
-            )
-            .contentType("application/x-www-form-urlencoded; charset=UTF-8")
-            .formParam("email", email)
-            .formParam("password", password)
-            .post(BASE_URL + "/api/auth");
+                    .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                    .formParam("email", email)
+                    .formParam("password", password)
+                    .post(BASE_URL + "/api/auth");
 
-    String jsonString = responsePostMethod.getBody().asString();
-    int responseCode = responsePostMethod.statusCode();
+            String jsonString = responsePostMethod.getBody().asString();
+            int responseCode = responsePostMethod.statusCode();
 
-    if(responseCode != 200) {
-        this.bearerToken = "null";
-    } else {
-        this.bearerToken = JsonPath.from(jsonString).get("data.token");
+        if(responseCode != 200) {
+            this.bearerToken = "null";
+        } else {
+            this.bearerToken = JsonPath.from(jsonString).get("data.token");
+        }
     }
-}
 
-    public String getToken() {
-        return bearerToken;
-    }
 
 //    Feeature: Login API
 
@@ -467,6 +496,61 @@ public void setToken(String role) throws Exception {
     }
 
 //    End of Feature: Customer Create Order API
+//    Feature: Edit Profile Customer
+
+    public void editProfile (String condition, String token) throws Exception {
+        System.out.println(token);
+//        form yg dibutuhin untuk edit profile:
+        String email = "";
+        String password = "";
+        String name = "";
+        String dob = "";
+        String gender = "";
+        String address = "";
+        String phone_number = "";
+
+//        pengkondisian berdasarkan kasus
+        switch (condition) {
+            case "normal":
+                name = "for test purposes";
+                dob = "1990-01-01";
+                gender = "male";
+                address = "test address";
+                phone_number = "081234567890";
+                break;
+            case "without_alldata":
+                break;
+            default:
+                throw new Exception("no such condition: "+condition);
+        }
+
+//        PUT method
+        SerenityRest.given().contentType("multipart/form-data")
+                .header("Authorization", "Bearer " + token)
+                .multiPart("email",email)
+                .multiPart("password",password)
+                .multiPart("name",name)
+                .multiPart("dob",dob)
+                .multiPart("gender",gender)
+                .multiPart("address",address)
+                .multiPart("phone_number",phone_number)
+                .put(BASE_URL+"/api/customers");
+
+        System.out.println(lastResponse().prettyPrint());
+
+    }
+
+//    End of Feature: Edit Profile Customer
+//    Feature: Delete Customer
+
+    public void deleteCustomer(String token) throws Exception {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .delete(BASE_URL + "/api/customers");
+    }
+
+//    End of Feature: Delete Customer
 //    Customer Order List API
 
     public void getOrderListBy(String parameter, String token) {
