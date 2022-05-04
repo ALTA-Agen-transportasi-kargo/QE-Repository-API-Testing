@@ -5,10 +5,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
+import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
+import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -45,6 +48,10 @@ public class bringeeeAPI {
             case "customer2":
                 email = "bunga@mail.com";
                 password = "bunga";
+                break;
+            case "akun_test":
+                email = "buattest@qe.alterra";
+                password = "test123";
                 break;
             default:
                 throw new Exception("no such role: " + role);
@@ -464,8 +471,6 @@ public class bringeeeAPI {
        }
     }
 
-
-
 //    End of Feature: Customer Create Order API
 //    Feature: Edit Profile Customer
 
@@ -522,6 +527,25 @@ public class bringeeeAPI {
     }
 
 //    End of Feature: Delete Customer
+//    Customer Order List API
+
+    public void getOrderListBy(String parameter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", parameter)
+                .get(BASE_URL + "/api/customers/orders");
+    }
+
+    public void getOrderListBy(int parameter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", parameter)
+                .get(BASE_URL + "/api/customers/orders");
+    }
+//    End of Feature: Customer Order List API
+//    Customer detail order API
+
+//    end of customer detail order API
 
 
 
