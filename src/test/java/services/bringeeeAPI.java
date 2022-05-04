@@ -5,13 +5,10 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
-import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
-import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -31,19 +28,23 @@ public class bringeeeAPI {
         switch (role) {
             case "customer":
                 email = "budi@mail.com";
-                password = "budi123";
+                password = "budi";
                 break;
             case "driver":
-                email = "ahmad@mail.com";
-                password = "ahmad123";
+                email = "driver1@mail.com";
+                password = "driver1";
                 break;
             case "admin":
                 email = "admin@mail.com";
-                password = "admin123";
+                password = "admin";
                 break;
             case "noLogin":
                 email = "";
                 password = "";
+                break;
+            case "customer2":
+                email = "bunga@mail.com";
+                password = "bunga";
                 break;
             default:
                 throw new Exception("no such role: " + role);
@@ -466,6 +467,61 @@ public class bringeeeAPI {
 
 
 //    End of Feature: Customer Create Order API
+//    Feature: Edit Profile Customer
+
+    public void editProfile (String condition, String token) throws Exception {
+        System.out.println(token);
+//        form yg dibutuhin untuk edit profile:
+        String email = "";
+        String password = "";
+        String name = "";
+        String dob = "";
+        String gender = "";
+        String address = "";
+        String phone_number = "";
+
+//        pengkondisian berdasarkan kasus
+        switch (condition) {
+            case "normal":
+                name = "for test purposes";
+                dob = "1990-01-01";
+                gender = "male";
+                address = "test address";
+                phone_number = "081234567890";
+                break;
+            case "without_alldata":
+                break;
+            default:
+                throw new Exception("no such condition: "+condition);
+        }
+
+//        PUT method
+        SerenityRest.given().contentType("multipart/form-data")
+                .header("Authorization", "Bearer " + token)
+                .multiPart("email",email)
+                .multiPart("password",password)
+                .multiPart("name",name)
+                .multiPart("dob",dob)
+                .multiPart("gender",gender)
+                .multiPart("address",address)
+                .multiPart("phone_number",phone_number)
+                .put(BASE_URL+"/api/customers");
+
+        System.out.println(lastResponse().prettyPrint());
+
+    }
+
+//    End of Feature: Edit Profile Customer
+//    Feature: Delete Customer
+
+    public void deleteCustomer(String token) throws Exception {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .delete(BASE_URL + "/api/customers");
+    }
+
+//    End of Feature: Delete Customer
 
 
 
