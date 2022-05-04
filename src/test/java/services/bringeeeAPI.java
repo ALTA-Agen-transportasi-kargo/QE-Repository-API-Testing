@@ -5,13 +5,10 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
-import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
-import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -652,6 +649,41 @@ public class bringeeeAPI {
     }
 
 //    End of Admin Confirm Driver API
+//    Set Price API - Admin
+    public void setPrice(int id, int price, String token) {
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .header("Authorization", "Bearer "+token)
+                .formParam("fixed_price", price)
+                .patch(BASE_URL+"/api/orders/"+id);
+    }
+
+    public void setPrice(String id, int price, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .formParam("fixed_price", price)
+                .patch(BASE_URL+"/api/orders/"+id);
+    }
+//    End of Set Price API
+//    Get detail order - Admin
+    public void adminOrderDetail(int id, String token) {
+        Response orderDetail = SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/orders/"+id);
+    }
+
+    public void adminOrderDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/orders/"+id);
+    }
+
+//    End of get detail order
 
 
 }
