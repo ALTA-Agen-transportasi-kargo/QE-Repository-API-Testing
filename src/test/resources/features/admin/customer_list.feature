@@ -12,9 +12,9 @@ Feature: Customer List API - Admin
   @positive
   Scenario: Admin GET customer list successfully using filter name
     Given user has already had login token as "admin"
-    When admin send GET request to show customer list with filter name "candra"
+    When admin send GET request to show customer list with filter name "budi"
     Then status response code should be 200
-    And result customer name should contain "candra"
+    And result customer name should contain "budi"
     And return body is matched with "success_customer_list.json" from "admin" schema
 
   @negative

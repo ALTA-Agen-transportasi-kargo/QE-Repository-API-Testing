@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dob": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "name",
+        "dob",
+        "gender",
+        "address",
+        "phone_number",
+        "avatar",
+        "role",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data"
+  ]
+}
