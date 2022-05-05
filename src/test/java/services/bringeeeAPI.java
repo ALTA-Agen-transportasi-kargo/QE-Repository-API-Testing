@@ -684,6 +684,18 @@ public class bringeeeAPI {
     }
 
 //    End of get detail order
+//      Admin Confirm Order API
+    public void adminConfirmOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/confirm");
+    }
 
+    public void adminConfirmOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/confirm");
+    }
+//    End of admin confirm order API
 
 }
