@@ -4,9 +4,9 @@ Feature: Confirm Order API - Admin
   @positive
   Scenario: Admin POST confirm order successfully
     Given user has already had login token as "admin"
-    When admin send POST request to confirm order with id: 13
+    When admin send POST request to confirm order with id: 15
     Then status response code should be 200
-    And order status changed to "CONFIRMED"
+    And order status with id 15 is changed to "CONFIRMED"
     And return body is matched with "success_confirm_order.json" from "admin" schema
 
   @negative
