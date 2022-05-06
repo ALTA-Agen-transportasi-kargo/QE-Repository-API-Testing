@@ -652,6 +652,33 @@ public class bringeeeAPI {
     }
 
 //    End of Admin Confirm Driver API
+//    Set Price API - Admin
+    public void setPrice(int id, int price, String token) {
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .header("Authorization", "Bearer "+token)
+                .formParam("fixed_price", price)
+                .patch(BASE_URL+"/api/orders/"+id);
+    }
+
+    public void setPrice(String id, int price, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .formParam("fixed_price", price)
+                .patch(BASE_URL+"/api/orders/"+id);
+    }
+//    End of Set Price API
+//    Get detail order - Admin
+    public void adminOrderDetail(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/orders/"+id);
+    }
 //      Admin Delete Customer API
 
     public void deleteCustomerID(int id, String token) {
@@ -672,5 +699,49 @@ public class bringeeeAPI {
 
 //    End of Admin Delete Customer API
 
+    public void adminOrderDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/orders/"+id);
+    }
+
+//    End of get detail order
+//      Admin Confirm Order API
+    public void adminConfirmOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/confirm");
+    }
+
+    public void adminConfirmOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/confirm");
+    }
+//    End of admin confirm order API
+//    Admin Cancel Order
+    public void adminCancelOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/cancel");
+    }
+
+    public void adminCancelOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/cancel");
+    }
+
+//    End of Admin Cancel Order
+//    Admin list order with filter
+    public void adminOrderListByStatus(String filter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", filter)
+                .queryParam("limit", 20)
+                .queryParam("page", 1)
+                .get(BASE_URL+"/api/orders");
+    }
+//    end of admin list order
 
 }
