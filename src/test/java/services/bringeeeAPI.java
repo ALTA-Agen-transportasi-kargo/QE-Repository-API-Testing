@@ -672,7 +672,7 @@ public class bringeeeAPI {
 //    End of Set Price API
 //    Get detail order - Admin
     public void adminOrderDetail(int id, String token) {
-        Response orderDetail = SerenityRest.given()
+        SerenityRest.given()
                 .header("Authorization", "Bearer "+token)
                 .get(BASE_URL+"/api/orders/"+id);
     }
@@ -697,5 +697,19 @@ public class bringeeeAPI {
                 .post(BASE_URL+"/api/orders/"+id+"/confirm");
     }
 //    End of admin confirm order API
+//    Admin Cancel Order
+    public void adminCancelOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/cancel");
+    }
+
+    public void adminCancelOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/orders/"+id+"/cancel");
+    }
+
+//    End of Admin Cancel Order
 
 }
