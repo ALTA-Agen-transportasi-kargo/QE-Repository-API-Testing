@@ -42,8 +42,8 @@ public class bringeeeAPI {
             password = "admin";
             break;
         case "customer2":
-            email = "bunga@mail.com";
-            password = "bunga";
+            email = "hailey@mail.com";
+            password = "hailey123";
             break;
         case "noLogin":
             email = "ga@ada.akun";
@@ -652,6 +652,25 @@ public class bringeeeAPI {
     }
 
 //    End of Admin Confirm Driver API
+//      Admin Delete Customer API
+
+    public void deleteCustomerID(int id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/customers/" + id);
+    }
+
+    public void deleteCustomerID(String id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/customers/" + id);
+    }
+
+
+
+//    End of Admin Delete Customer API
 
 
 }
