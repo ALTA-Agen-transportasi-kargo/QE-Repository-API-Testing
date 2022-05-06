@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "type": "string"
+        },
+        "last": {
+          "type": "string"
+        },
+        "previous": {
+          "type": "string"
+        },
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "first",
+        "last",
+        "previous",
+        "self"
+      ]
+    },
+    "data": {
+      "type": "array",
+      "items": {}
+    },
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "total_pages": {
+          "type": "integer"
+        },
+        "total_records": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "page",
+        "limit",
+        "total_pages",
+        "total_records"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data",
+    "pagination"
+  ]
+}
