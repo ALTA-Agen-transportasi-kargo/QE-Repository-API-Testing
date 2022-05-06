@@ -711,5 +711,15 @@ public class bringeeeAPI {
     }
 
 //    End of Admin Cancel Order
+//    Admin list order with filter
+    public void adminOrderListByStatus(String filter, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .queryParam("status", filter)
+                .queryParam("limit", 20)
+                .queryParam("page", 1)
+                .get(BASE_URL+"/api/orders");
+    }
+//    end of admin list order
 
 }
