@@ -5,10 +5,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
+import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
+import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -39,8 +42,8 @@ public class bringeeeAPI {
             password = "admin";
             break;
         case "customer2":
-            email = "bunga@mail.com";
-            password = "bunga";
+            email = "hailey@mail.com";
+            password = "hailey123";
             break;
         case "noLogin":
             email = "ga@ada.akun";
@@ -676,6 +679,25 @@ public class bringeeeAPI {
                 .header("Authorization", "Bearer "+token)
                 .get(BASE_URL+"/api/orders/"+id);
     }
+//      Admin Delete Customer API
+
+    public void deleteCustomerID(int id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/customers/" + id);
+    }
+
+    public void deleteCustomerID(String id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/customers/" + id);
+    }
+
+
+
+//    End of Admin Delete Customer API
 
     public void adminOrderDetail(String id, String token) {
         SerenityRest.given()
