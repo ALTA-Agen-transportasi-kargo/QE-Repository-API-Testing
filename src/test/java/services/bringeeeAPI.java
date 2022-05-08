@@ -788,17 +788,30 @@ public class bringeeeAPI {
         SerenityRest.given()
                 .header("Authorization", "Bearer "+token)
                 .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
-
-        System.out.println(lastResponse().prettyPrint());
     }
 
     public void driverTakeOrder(String id, String token) {
         SerenityRest.given()
                 .header("Authorization", "Bearer "+token)
                 .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
-
-        System.out.println(lastResponse().prettyPrint());
     }
 
 //    End of Driver Take order API
+//    Driver Finish order
+
+    public void driverFinishOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .multiPart("arrived_picture", new File("src/test/resources/upload/finish.jpg"))
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/finish_order");
+    }
+
+    public void driverFinishOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .multiPart("arrived_picture", new File("src/test/resources/upload/finish.jpg"))
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/finish_order");
+    }
+
+//    End of Driver Finish Order
 }
