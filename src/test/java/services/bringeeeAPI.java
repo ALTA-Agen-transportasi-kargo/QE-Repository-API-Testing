@@ -151,8 +151,6 @@ public class bringeeeAPI {
                     .header("Authorization", "Bearer "+token)
                     .get(BASE_URL+"/api/auth/me");
         }
-        System.out.println(token);
-
     }
 //    End of Feature: Login API
 
@@ -814,4 +812,15 @@ public class bringeeeAPI {
     }
 
 //    End of Driver Finish Order
+//    Driver order list API
+
+    public void driverOrderList(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/drivers/orders");
+    }
+
+
+//    end of driver order list API
+
 }
