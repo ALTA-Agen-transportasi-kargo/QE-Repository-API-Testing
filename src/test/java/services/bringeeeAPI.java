@@ -37,6 +37,14 @@ public class bringeeeAPI {
             email = "driver1@mail.com";
             password = "driver1";
             break;
+        case "driver2":
+            email = "driver2@mail.com";
+            password = "driver2";
+            break;
+        case "driver4":
+            email = "driver4@mail.com";
+            password = "driver4";
+            break;
         case "admin":
             email = "admin@mail.com";
             password = "admin";
@@ -774,4 +782,23 @@ public class bringeeeAPI {
     }
 
 //    End of Customer Cancel Order API
+//    Driver Take an order API
+
+    public void driverTakeOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+    public void driverTakeOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
+
+        System.out.println(lastResponse().prettyPrint());
+    }
+
+//    End of Driver Take order API
 }
