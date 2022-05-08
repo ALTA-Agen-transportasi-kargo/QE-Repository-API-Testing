@@ -1,0 +1,380 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "array",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "driver_id": {
+          "type": "integer"
+        },
+        "driver": {
+          "type": "array",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "user_id": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dob": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "avatar": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "truck_type_id": {
+              "type": "integer"
+            },
+            "truck_type": {
+              "type": "array",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "truck_type": {
+                  "type": "string"
+                },
+                "max_volume": {
+                  "type": "integer"
+                },
+                "max_weight": {
+                  "type": "integer"
+                },
+                "price_per_distance": {
+                  "type": "integer"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "truck_type",
+                "max_volume",
+                "max_weight",
+                "price_per_distance",
+                "created_at",
+                "updated_at"
+              ]
+            },
+            "ktp_file": {
+              "type": "string"
+            },
+            "stnk_file": {
+              "type": "string"
+            },
+            "driver_license_file": {
+              "type": "string"
+            },
+            "age": {
+              "type": "integer"
+            },
+            "vehicle_identifier": {
+              "type": "string"
+            },
+            "nik": {
+              "type": "string"
+            },
+            "vehicle_picture": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "account_status": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "user_id",
+            "email",
+            "name",
+            "dob",
+            "gender",
+            "address",
+            "phone_number",
+            "avatar",
+            "role",
+            "truck_type_id",
+            "truck_type",
+            "ktp_file",
+            "stnk_file",
+            "driver_license_file",
+            "age",
+            "vehicle_identifier",
+            "nik",
+            "vehicle_picture",
+            "status",
+            "account_status",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "customer_id": {
+          "type": "integer"
+        },
+        "customer": {
+          "type": "array",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "email": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "dob": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "phone_number": {
+              "type": "string"
+            },
+            "avatar": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "email",
+            "name",
+            "dob",
+            "gender",
+            "address",
+            "phone_number",
+            "avatar",
+            "role",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "destination_start_province": {
+          "type": "string"
+        },
+        "destination_start_city": {
+          "type": "string"
+        },
+        "destination_start_district": {
+          "type": "string"
+        },
+        "destination_start_address": {
+          "type": "string"
+        },
+        "destination_start_postal": {
+          "type": "string"
+        },
+        "destination_start_lat": {
+          "type": "string"
+        },
+        "destination_start_long": {
+          "type": "string"
+        },
+        "destination_end_province": {
+          "type": "string"
+        },
+        "destination_end_city": {
+          "type": "string"
+        },
+        "destination_end_district": {
+          "type": "string"
+        },
+        "destination_end_address": {
+          "type": "string"
+        },
+        "destination_end_postal": {
+          "type": "string"
+        },
+        "destination_end_lat": {
+          "type": "string"
+        },
+        "destination_end_long": {
+          "type": "string"
+        },
+        "truck_type_id": {
+          "type": "integer"
+        },
+        "truck_type": {
+          "type": "array",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "truck_type": {
+              "type": "string"
+            },
+            "max_volume": {
+              "type": "integer"
+            },
+            "max_weight": {
+              "type": "integer"
+            },
+            "price_per_distance": {
+              "type": "integer"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "truck_type",
+            "max_volume",
+            "max_weight",
+            "price_per_distance",
+            "created_at",
+            "updated_at"
+          ]
+        },
+        "order_picture": {
+          "type": "string"
+        },
+        "total_volume": {
+          "type": "integer"
+        },
+        "total_weight": {
+          "type": "integer"
+        },
+        "distance": {
+          "type": "integer"
+        },
+        "estimated_price": {
+          "type": "integer"
+        },
+        "fix_price": {
+          "type": "integer"
+        },
+        "transaction_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "arrived_picture": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "driver_id",
+        "driver",
+        "customer_id",
+        "customer",
+        "destination_start_province",
+        "destination_start_city",
+        "destination_start_district",
+        "destination_start_address",
+        "destination_start_postal",
+        "destination_start_lat",
+        "destination_start_long",
+        "destination_end_province",
+        "destination_end_city",
+        "destination_end_district",
+        "destination_end_address",
+        "destination_end_postal",
+        "destination_end_lat",
+        "destination_end_long",
+        "truck_type_id",
+        "truck_type",
+        "order_picture",
+        "total_volume",
+        "total_weight",
+        "distance",
+        "estimated_price",
+        "fix_price",
+        "transaction_id",
+        "status",
+        "description",
+        "arrived_picture",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data"
+  ]
+}
