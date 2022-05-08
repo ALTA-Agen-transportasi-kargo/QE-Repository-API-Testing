@@ -759,4 +759,19 @@ public class bringeeeAPI {
 
 
 //    End of Customer Confirm Order API
+//    Customer Cancel Order API
+
+    public void custCancelOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+    public void custCancelOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+//    End of Customer Cancel Order API
 }
