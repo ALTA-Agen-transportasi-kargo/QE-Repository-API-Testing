@@ -829,5 +829,12 @@ public class bringeeeAPI {
                 .get(BASE_URL+"/api/drivers/orders");
     }
 //    End of driver current order API
+//    Driver Finished Order List API
+    public void driverFinishedOrders(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/drivers/history_orders");
+    }
+//    End of driver Finished Orders
 
 }
