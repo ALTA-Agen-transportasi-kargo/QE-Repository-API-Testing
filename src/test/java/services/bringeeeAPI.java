@@ -743,5 +743,35 @@ public class bringeeeAPI {
                 .get(BASE_URL+"/api/orders");
     }
 //    end of admin list order
+//      Customer confirm order API
 
+    public void custConfirmOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/confirm");
+    }
+
+    public void custConfirmOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/confirm");
+    }
+
+
+//    End of Customer Confirm Order API
+//    Customer Cancel Order API
+
+    public void custCancelOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+    public void custCancelOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+//    End of Customer Cancel Order API
 }
