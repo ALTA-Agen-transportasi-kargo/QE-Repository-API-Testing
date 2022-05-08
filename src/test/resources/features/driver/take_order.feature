@@ -4,9 +4,9 @@ Feature: Take Order API - Driver
   @positive
   Scenario: Driver POST take orders successfully
     Given user has already had login token as "driver4"
-    When driver send POST request to take an order with id 20
+    When driver send POST request to take an order with id 21
     Then status response code should be 200
-    And order id 20 status should change to "ON_PROCESS"
+    And order id 21 status should change to "ON_PROCESS"
     And return body is matched with "success_take_order.json" from "driver" schema
 
   @negative
