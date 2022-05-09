@@ -960,4 +960,18 @@ public void driverCount(String token) {
                 .post(BASE_URL+"/api/export/orders");
     }
 //    end of Export orders API
+//    Order Statistics per Day API
+
+    public void orderStatsPerDay(int day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+
+    public void orderStatsPerDay(String day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+//    End of order statistics per day API
 }
