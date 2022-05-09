@@ -862,5 +862,67 @@ public class bringeeeAPI {
 
     }
 //    End of Create Payment API
+//    Admin OrderCount API
+    public void orderCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+    public void orderCountStatus(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("status", status)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+    public void orderCountTruck(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("truck_type", id)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+//    end of admin OrderCount API
+//    Admin driver count API
+public void driverCount(String token) {
+    SerenityRest.given()
+            .header("Authorization", "Bearer " + token)
+            .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+}
+
+    public void driverCountStatus(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("status", status)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void driverCountAccount(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("account_status", status)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void driverCountTruck(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("truck_type", id)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void customerCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/customers_count");
+    }
+
+    public void truckTypeCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/truck_types_count");
+    }
+//    end of admin driver count API
 
 }
