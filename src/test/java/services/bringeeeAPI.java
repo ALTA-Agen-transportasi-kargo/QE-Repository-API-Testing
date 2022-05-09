@@ -5,13 +5,10 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
-import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
-import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -924,5 +921,43 @@ public void driverCount(String token) {
                 .get(BASE_URL+"/api/stats/aggregates/truck_types_count");
     }
 //    end of admin driver count API
+//      export orders API
 
+    public void exportOrders(int month, int year, String token) {
+        if (month < 1 && year < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .post(BASE_URL+"/api/export/orders");
+        } else if (month < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("year", year)
+                    .post(BASE_URL+"/api/export/orders");
+        } else if (year < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("month", month)
+                    .post(BASE_URL+"/api/export/orders");
+        } else {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("month", month)
+                    .formParam("year", year)
+                    .post(BASE_URL+"/api/export/orders");
+        }
+    }
+
+    public void exportOrders(String month, String year, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .contentType(ContentType.URLENC)
+                .formParam("month", month)
+                .formParam("year", year)
+                .post(BASE_URL+"/api/export/orders");
+    }
+//    end of Export orders API
 }
