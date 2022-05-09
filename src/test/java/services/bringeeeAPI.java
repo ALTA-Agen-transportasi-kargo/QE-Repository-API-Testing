@@ -836,5 +836,31 @@ public class bringeeeAPI {
                 .get(BASE_URL+"/api/drivers/history_orders");
     }
 //    End of driver Finished Orders
+//    Customer Create Payment API
+    public void customerCreatePayment(int id, String bank, String token){
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .header("Authorization", "Bearer "+token)
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .formParam("payment_method", bank)
+                .post(BASE_URL+"/api/customers/orders/"+ id + "/payment");
+
+    }
+    public void customerCreatePayment(String id, String bank, String token){
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .header("Authorization", "Bearer "+token)
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .formParam("payment_method", bank)
+                .post(BASE_URL+"/api/customers/orders/"+ id + "/payment");
+
+    }
+//    End of Create Payment API
 
 }
