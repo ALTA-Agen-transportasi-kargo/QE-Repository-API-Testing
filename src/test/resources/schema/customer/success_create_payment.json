@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "code": {
+      "type": "integer"
+    },
+    "error": {
+      "type": "null"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string"
+        },
+        "transaction_id": {
+          "type": "string"
+        },
+        "payment_method": {
+          "type": "string"
+        },
+        "bill_number": {
+          "type": "string"
+        },
+        "bank": {
+          "type": "string"
+        },
+        "gross_amount": {
+          "type": "integer"
+        },
+        "transaction_time": {
+          "type": "string"
+        },
+        "transaction_expire": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "order_id",
+        "transaction_id",
+        "payment_method",
+        "bill_number",
+        "bank",
+        "gross_amount",
+        "transaction_time",
+        "transaction_expire"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "code",
+    "error",
+    "links",
+    "data"
+  ]
+}
