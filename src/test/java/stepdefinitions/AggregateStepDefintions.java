@@ -1,7 +1,18 @@
 package stepdefinitions;
 
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.But;
 import io.cucumber.java.en.When;
+import org.hamcrest.Matchers;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.Assert;
 import services.bringeeeAPI;
+
+import static net.serenitybdd.rest.SerenityRest.lastResponse;
+import static net.serenitybdd.rest.SerenityRest.restAssuredThat;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 
 public class AggregateStepDefintions {
     bringeeeAPI bringeee = new bringeeeAPI();
@@ -82,5 +93,43 @@ public class AggregateStepDefintions {
     public void sendGETRequestToCountTruckTypes(String role) throws Exception {
         bringeee.setToken(role);
         bringeee.truckTypeCount(bringeee.getToken());
+    }
+
+    @When("admin send GET order statistics for {int} days prior")
+    public void adminSendGETOrderStatisticsForDaysPrior(int day) throws Exception {
+        bringeee.setToken("admin");
+        bringeee.orderStatsPerDay(day, bringeee.getToken());
+    }
+
+    @And("report for today and {int} days prior will be shown")
+    public void reportForTodayAndDaysPriorWillBeShown(int day) throws Exception {
+        JSONObject responseJson = new JSONObject(lastResponse().asString());
+        JSONArray data = responseJson.getJSONArray("data");
+
+        JSONObject dataObject = data.getJSONObject(0);
+        JSONArray label = dataObject.getJSONArray("label");
+
+        int totalDay = day + 1;
+        int totalData = label.length();
+
+        Assert.assertEquals(totalDay, totalData);
+
+    }
+
+    @But("{string} should be empty")
+    public void shouldBeEmpty(String key) {
+        restAssuredThat(response -> response.assertThat().body(key, empty()));
+    }
+
+    @When("admin send GET order statistics for {string} days prior")
+    public void adminSendGETOrderStatisticsForDaysPrior(String day) throws Exception {
+        bringeee.setToken("admin");
+        bringeee.orderStatsPerDay(day, bringeee.getToken());
+    }
+
+    @When("{string} send GET order statistics for {int} days prior")
+    public void sendGETOrderStatisticsForDaysPrior(String role, int day) throws Exception {
+        bringeee.setToken(role);
+        bringeee.orderStatsPerDay(day, bringeee.getToken());
     }
 }
