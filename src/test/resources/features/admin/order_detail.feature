@@ -19,7 +19,7 @@ Feature: Order Detail API - Admin
     | id | note      |
     | 0  | x         |
     | -1 | x         |
-    | 17 | max id +1 |
+    | 30 | max id +1 |
 
   @negative
   Scenario Outline: Admin GET order detail unsuccessfully by using string as id
@@ -43,5 +43,4 @@ Feature: Order Detail API - Admin
   Examples:
     | role     | schema                   |
     | customer | failed_detail_order.json |
-    | driver   | failed_detail_order.json |
     | noLogin  | nologin_failure.json     |
