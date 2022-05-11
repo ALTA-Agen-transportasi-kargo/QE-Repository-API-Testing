@@ -5,10 +5,13 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
+import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
+import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -148,6 +151,8 @@ public class bringeeeAPI {
                     .header("Authorization", "Bearer "+token)
                     .get(BASE_URL+"/api/auth/me");
         }
+        System.out.println(token);
+
     }
 //    End of Feature: Login API
 
@@ -972,4 +977,74 @@ public void customerPaymentDetail(int id, String token) {
                 .get(BASE_URL+"/api/customers/orders/" + id + "/payment");
     }
 //    end of Detail Customer Payment
+//    Order Statistics per Day API
+
+    public void orderStatsPerDay(int day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+
+    public void orderStatsPerDay(String day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+//    End of order statistics per day API
+//    Feature: Admin Edit Profile Driver
+
+    public void adminEditProfileDriver ( int id, String token) throws Exception {
+        System.out.println(token);
+//        form yg dibutuhin untuk edit profile:
+         int truck_type_id = 2;
+         File ktp_file = new File("src/test/resources/upload/ktp.jpg");
+         File stnk_file = new File("src/test/resources/upload/stnk.jpg");
+         File driver_license_file = new File("src/test/resources/upload/driver_license.jpg");
+         int age = 37;
+         String vehicle_identifier = "P LST G";
+         String nik = "12345678299292";
+         File vehicle_picture = new File("src/test/resources/upload/vehicle_picture.jpg");
+
+
+//        PUT method
+        SerenityRest.given().contentType("multipart/form-data")
+                .header("Authorization", "Bearer " + token)
+                .multiPart("truck_type_id",truck_type_id)
+                .multiPart("ktp_file", ktp_file)
+                .multiPart("stnk_file", stnk_file)
+                .multiPart("driver_license_file", driver_license_file)
+                .multiPart("age",age)
+                .multiPart("vehicle_identifier", vehicle_identifier)
+                .multiPart("nik",nik)
+                .multiPart("vehicle_picture", vehicle_picture)
+                .put(BASE_URL+"/api/drivers/" + id);
+
+        System.out.println(lastResponse().prettyPrint());
+
+    }
+
+
+
+
+//    End of Feature: Admin Edit Profile Driver
+
+//      Admin Delete Driver API
+
+    public void deleteDriverID(int id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/drivers/" + id);
+    }
+
+    public void deleteDriverID(String id, String token) {
+        System.out.println(token);
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .delete(BASE_URL + "/api/drivers/" + id);
+    }
+
+
+//    End of Admin Delete Customer API
+
 }

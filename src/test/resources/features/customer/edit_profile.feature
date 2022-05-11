@@ -1,14 +1,14 @@
 @customer-edit-profile
 Feature: Edit Customer API - customer
 
-  @positive @success-edit
+  @positive @success-edit-customer
   Scenario: PUT customer success edit profile
     Given user has already had login token as "customer"
     When customer send PUT request to edit profile
     Then status response code should be 200
     And return body is matched with "success_edit_profile.json" from "customer" schema
 
-  @negative @failed-edit
+  @negative @failed-edit-customer
   Scenario Outline: PUT customer unsuccess edit profile
     Given user has already had login token as "customer"
     When customer send PUT request to edit profile without condition: "<condition>"
@@ -20,7 +20,7 @@ Feature: Edit Customer API - customer
       | without_alldata     |
 
 
-  @negative @failed-edit-not-login
+  @negative @failed-edit-not-login-customer
   Scenario: PUT customer unsuccess edit profile by not logging in
     Given user hasn't already had login token
     When customer send PUT request to edit profile but not log in
