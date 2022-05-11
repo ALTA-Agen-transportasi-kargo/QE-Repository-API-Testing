@@ -974,4 +974,23 @@ public void driverCount(String token) {
                 .get(BASE_URL+"/api/stats/orders/"+day);
     }
 //    End of order statistics per day API
+
+//    Admin order histories API
+
+    public void getOrderHistoriesAdmin(int id, String token) {
+
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/orders/"+id+"/histories");
+    }
+
+
+    public void getOrderHistoriesAdmin(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/orders/"+id+"/histories");
+    }
+
+
+//    End of Admin order histories API
 }
