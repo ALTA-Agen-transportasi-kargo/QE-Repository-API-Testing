@@ -5,13 +5,10 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.config.EncoderConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
-import org.checkerframework.checker.units.qual.C;
 
 
 import java.io.File;
-import java.util.Objects;
 
 import static net.serenitybdd.rest.SerenityRest.*;
 
@@ -1047,4 +1044,23 @@ public void customerPaymentDetail(int id, String token) {
 
 //    End of Admin Delete Customer API
 
+
+//    Admin order histories API
+
+    public void getOrderHistoriesAdmin(int id, String token) {
+
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/orders/"+id+"/histories");
+    }
+
+
+    public void getOrderHistoriesAdmin(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/orders/"+id+"/histories");
+    }
+
+
+//    End of Admin order histories API
 }
