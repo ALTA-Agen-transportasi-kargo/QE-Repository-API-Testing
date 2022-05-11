@@ -960,4 +960,16 @@ public void driverCount(String token) {
                 .post(BASE_URL+"/api/export/orders");
     }
 //    end of Export orders API
+//    detail customer payment
+public void customerPaymentDetail(int id, String token) {
+    SerenityRest.given()
+            .header("Authorization", "Bearer "+token)
+            .get(BASE_URL+"/api/customers/orders/" + id + "/payment");
+}
+    public void customerPaymentDetail(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/customers/orders/" + id + "/payment");
+    }
+//    end of Detail Customer Payment
 }
