@@ -37,6 +37,14 @@ public class bringeeeAPI {
             email = "driver1@mail.com";
             password = "driver1";
             break;
+        case "driver2":
+            email = "driver2@mail.com";
+            password = "driver2";
+            break;
+        case "driver4":
+            email = "driver4@mail.com";
+            password = "driver4";
+            break;
         case "admin":
             email = "admin@mail.com";
             password = "admin";
@@ -743,7 +751,234 @@ public class bringeeeAPI {
                 .get(BASE_URL+"/api/orders");
     }
 //    end of admin list order
+//      Customer confirm order API
 
+    public void custConfirmOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/confirm");
+    }
+
+    public void custConfirmOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/confirm");
+    }
+
+
+//    End of Customer Confirm Order API
+//    Customer Cancel Order API
+
+    public void custCancelOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+    public void custCancelOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/customers/orders/"+id+"/cancel");
+    }
+
+//    End of Customer Cancel Order API
+//    Driver Take an order API
+
+    public void driverTakeOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
+    }
+
+    public void driverTakeOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/take_order");
+    }
+
+//    End of Driver Take order API
+//    Driver Finish order
+
+    public void driverFinishOrder(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .multiPart("arrived_picture", new File("src/test/resources/upload/finish.jpg"))
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/finish_order");
+    }
+
+    public void driverFinishOrder(String id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .multiPart("arrived_picture", new File("src/test/resources/upload/finish.jpg"))
+                .post(BASE_URL+"/api/drivers/orders/"+id+"/finish_order");
+    }
+
+//    End of Driver Finish Order
+//    Driver order list API
+
+    public void driverOrderList(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/drivers/orders");
+    }
+
+
+//    end of driver order list API
+//    driver current order API
+    public void driverCurrentOrder(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/drivers/orders");
+    }
+//    End of driver current order API
+//    Driver Finished Order List API
+    public void driverFinishedOrders(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/drivers/history_orders");
+    }
+//    End of driver Finished Orders
+//    Customer Create Payment API
+    public void customerCreatePayment(int id, String bank, String token){
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .header("Authorization", "Bearer "+token)
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .formParam("payment_method", bank)
+                .post(BASE_URL+"/api/customers/orders/"+ id + "/payment");
+
+    }
+    public void customerCreatePayment(String id, String bank, String token){
+        SerenityRest.given().config(RestAssured.config()
+                        .encoderConfig(EncoderConfig.encoderConfig()
+                                .encodeContentTypeAs("", ContentType.URLENC)
+                        )
+                )
+                .header("Authorization", "Bearer "+token)
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
+                .formParam("payment_method", bank)
+                .post(BASE_URL+"/api/customers/orders/"+ id + "/payment");
+
+    }
+//    End of Create Payment API
+//    Admin OrderCount API
+    public void orderCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+    public void orderCountStatus(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("status", status)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+    public void orderCountTruck(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("truck_type", id)
+                .get(BASE_URL+"/api/stats/aggregates/orders_count");
+    }
+
+//    end of admin OrderCount API
+//    Admin driver count API
+public void driverCount(String token) {
+    SerenityRest.given()
+            .header("Authorization", "Bearer " + token)
+            .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+}
+
+    public void driverCountStatus(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("status", status)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void driverCountAccount(String status, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("account_status", status)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void driverCountTruck(int id, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .queryParam("truck_type", id)
+                .get(BASE_URL+"/api/stats/aggregates/drivers_count");
+    }
+
+    public void customerCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/customers_count");
+    }
+
+    public void truckTypeCount(String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .get(BASE_URL+"/api/stats/aggregates/truck_types_count");
+    }
+//    end of admin driver count API
+//      export orders API
+
+    public void exportOrders(int month, int year, String token) {
+        if (month < 1 && year < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .post(BASE_URL+"/api/export/orders");
+        } else if (month < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("year", year)
+                    .post(BASE_URL+"/api/export/orders");
+        } else if (year < 1) {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("month", month)
+                    .post(BASE_URL+"/api/export/orders");
+        } else {
+            SerenityRest.given()
+                    .header("Authorization", "Bearer " + token)
+                    .contentType(ContentType.URLENC)
+                    .formParam("month", month)
+                    .formParam("year", year)
+                    .post(BASE_URL+"/api/export/orders");
+        }
+    }
+
+    public void exportOrders(String month, String year, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer " + token)
+                .contentType(ContentType.URLENC)
+                .formParam("month", month)
+                .formParam("year", year)
+                .post(BASE_URL+"/api/export/orders");
+    }
+//    end of Export orders API
+//    Order Statistics per Day API
+
+    public void orderStatsPerDay(int day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+
+    public void orderStatsPerDay(String day, String token) {
+        SerenityRest.given()
+                .header("Authorization", "Bearer "+token)
+                .get(BASE_URL+"/api/stats/orders/"+day);
+    }
+//    End of order statistics per day API
 //    Feature: Admin Edit Profile Driver
 
     public void adminEditProfileDriver ( int id, String token) throws Exception {
